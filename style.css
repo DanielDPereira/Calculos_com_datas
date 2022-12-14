@@ -1,0 +1,20 @@
+body{
+    background-color: rgba(78, 255, 152, 0.11)!important;
+}
+
+.created-by{
+    position: fixed;
+    display: flex;
+    top: 95%;
+    left: 1%;
+}
+
+input[type="date" i] {
+    border-radius: 5em;
+    color: #00490c;
+}
+
+input[type="submit" i] {
+    border-radius: 5em;
+    color: #00490c;
+}
