@@ -45,11 +45,10 @@ btn.addEventListener("click", function(e){
 
 });
 
-//Início do código da operação 2
 
 const btn2 = document.querySelector("#send2");
 
-btn.addEventListener("click", function(e){
+btn2.addEventListener("click", function(e){
 
     e.preventDefault();
 
@@ -60,7 +59,18 @@ btn.addEventListener("click", function(e){
     var ano = data.getFullYear();
     dataAtual = ano + '-' + mes + '-' + dia;
     console.log(dataAtual);
+    
+    let data_contagem = document.getElementById('dataX').value;
+    console.log(data_contagem);
 
-    let data1_entrada = document.getElementById('dataX').value;
+    //Calculando
+    const d1 = dataAtual;
+    const d2 = data_contagem;
+    const diffInMs   = new Date(d2) - new Date(d1)
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    console.log(diffInDays)
+    
+
+
 
 });
