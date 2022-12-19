@@ -43,6 +43,8 @@ btn.addEventListener("click", function(e){
     console.log(data1_array);
     console.log(data2_array);
 
+    document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+diffInDays+" dias "
+
 });
 
 
