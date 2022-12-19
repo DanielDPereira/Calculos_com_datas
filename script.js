@@ -45,6 +45,8 @@ btn.addEventListener("click", function(e){
 
 });
 
+//Início do código da operação 2
+
 const btn2 = document.querySelector("#send2");
 
 btn.addEventListener("click", function(e){
@@ -58,4 +60,7 @@ btn.addEventListener("click", function(e){
     var ano = data.getFullYear();
     dataAtual = ano + '-' + mes + '-' + dia;
     console.log(dataAtual);
+
+    let data1_entrada = document.getElementById('dataX').value;
+
 });
