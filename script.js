@@ -43,7 +43,7 @@ btn.addEventListener("click", function(e){
     console.log(data1_array);
     console.log(data2_array);
 
-    document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+diffInDays+" dias "
+    document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+Math.abs(diffInDays)+" dias ";
 
 });
 
@@ -82,6 +82,9 @@ btn2.addEventListener("click", function(e){
     const diffInMs   = new Date(d2) - new Date(d1)
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     console.log(diffInDays)
+
+    document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dias da data atual";
+
     
 
 
