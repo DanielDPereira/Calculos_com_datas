@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(78, 255, 152, 0.11)!important;
+    background-color: #bfd4f3!important;
 }
 
 .created-by{
@@ -11,10 +11,22 @@ body{
 
 input[type="date" i] {
     border-radius: 5em;
-    color: #00490c;
+    color: #68c2cd;
+    filter: drop-shadow(0 0 0.4em rgba(0, 173, 254));
 }
 
 input[type="submit" i] {
     border-radius: 5em;
-    color: #00490c;
+    color: #68c2cd;
+    filter: drop-shadow(0 0 0.4em rgba(0, 173, 254));
+}
+
+.p-Daniel {
+    filter: drop-shadow(0 0 0.4em rgba(0, 173, 254));
+    color: #ffffff;
+}
+
+p,
+h1{
+    color: #000000;
 }
