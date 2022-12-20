@@ -45,6 +45,11 @@ btn.addEventListener("click", function(e){
 
     document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+Math.abs(diffInDays)+" dias ";
 
+    if(isNaN(diffInDays)){
+        document.getElementById("resultado1").innerHTML = "<b>Insira um valor válido</b>";
+        console.log("Valor NaN inserido no cálculo 1");
+    }
+
 });
 
 const btn2 = document.querySelector("#send2");
@@ -76,5 +81,11 @@ btn2.addEventListener("click", function(e){
     }else{
         document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dias da data atual";
     }
-    
+
+
+    if(isNaN(diffInDays)){
+        document.getElementById("resultado2").innerHTML = "<b>Insira um valor válido</b>";
+        console.log("Valor NaN inserido no cálculo 2");
+    }
+
 });
