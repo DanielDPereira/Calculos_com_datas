@@ -47,18 +47,6 @@ btn.addEventListener("click", function(e){
 
 });
 
-
-if (1+1==2){
-    var data = new Date();
-    var dia = String(data.getDate()).padStart(2, '0');
-    var mes = String(data.getMonth() + 1).padStart(2, '0');
-    var ano = data.getFullYear();
-    dataAtual = ano + '-' + mes + '-' + dia;
-    console.log(dataAtual);
-
-    document.getElementById("div_dataX").innerHTML = "<input style='text-align: center;' type='date' id='dataX' name='dataX' min="+dataAtual+ ">";
-}
-
 const btn2 = document.querySelector("#send2");
 
 btn2.addEventListener("click", function(e){
@@ -83,10 +71,10 @@ btn2.addEventListener("click", function(e){
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     console.log(diffInDays)
 
-    document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dias da data atual";
-
+    if(diffInDays == 0){
+        document.getElementById("resultado2").innerHTML = "<b>É hoje!</b>";
+    }else{
+        document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dias da data atual";
+    }
     
-
-
-
 });
