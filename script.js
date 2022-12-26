@@ -43,7 +43,13 @@ btn.addEventListener("click", function(e){
     console.log(data1_array);
     console.log(data2_array);
 
-    document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+Math.abs(diffInDays)+" dias ";
+    if (diffInDays > 1) {
+        document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+Math.abs(diffInDays)+" dias ";
+    }else{
+        if(diffInDays == 1) {
+            document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de 1 dia ";
+        }
+    }
 
     if(isNaN(diffInDays)){
         document.getElementById("resultado1").innerHTML = "<b>Insira um valor válido</b>";
