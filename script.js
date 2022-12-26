@@ -85,9 +85,12 @@ btn2.addEventListener("click", function(e){
     if(diffInDays == 0){
         document.getElementById("resultado2").innerHTML = "<b>É hoje!</b>";
     }else{
+        if(diffInDays == 1){
+            document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dia da data atual";
+        }else{
         document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dias da data atual";
+        }
     }
-
 
     if(isNaN(diffInDays)){
         document.getElementById("resultado2").innerHTML = "<b>Insira um valor válido</b>";
