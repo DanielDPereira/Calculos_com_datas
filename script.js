@@ -42,6 +42,10 @@ btn.addEventListener("click", function(e){
 
     let diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
+    if (d1 == d2){
+        diffInDays = 0
+    }
+
     console.log(diffInMs)
     console.log(diffInDays)
 
@@ -56,6 +60,10 @@ btn.addEventListener("click", function(e){
     }else{
         if(diffInDays == 1) {
             document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de 1 dia ";
+        }
+
+        if(diffInDays == 0){
+            document.getElementById("resultado1").innerHTML = "<b>Ambas as datas são o mesmo dia</b>";
         }
     }
 
