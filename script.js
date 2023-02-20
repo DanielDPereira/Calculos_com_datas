@@ -31,7 +31,7 @@ btn.addEventListener("click", function(e){
     //Calculando
     const d1 = data1_entrada;
     const d2 = data2_entrada;
-    const diffInMs   = new Date(d2) - new Date(d1)    
+    const diffInMs = new Date(d2) - new Date(d1)    
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     console.log(diffInDays)
 
