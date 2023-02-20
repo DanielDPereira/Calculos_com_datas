@@ -34,6 +34,7 @@ btn.addEventListener("click", function(e){
 
     let diffInMs = 0;
 
+    //Verificando qual data é maior para calcular
     if (d1 > d2) {
         diffInMs = new Date(d1) - new Date(d2)
     }else{
