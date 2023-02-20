@@ -56,6 +56,7 @@ btn.addEventListener("click", function(e){
     console.log(data1_array);
     console.log(data2_array);
 
+    //Retornando resultados no HTML
     if (diffInDays > 1) {
         document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+Math.abs(diffInDays)+" dias ";
     }else{
