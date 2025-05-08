@@ -59,7 +59,3 @@ body{
 .nav-item{
     margin-right: 1em!important;
 }
-
-.navbar.navbar-expand-sm.bg-dark.navbar-dark{
-    border-radius: 0px 0px 8px 8px!important;
-}
