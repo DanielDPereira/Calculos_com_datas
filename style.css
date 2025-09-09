@@ -1,37 +1,13 @@
-body{
-    background-color: #a3c0ec!important;
+:root { 
+  color-scheme: light dark; 
 }
 
-.created-by{
-    position: fixed;
-    display: flex;
-    top: 95%;
-    left: 1%;
+html { 
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; 
 }
 
-input[type="date" i] {
-    border-radius: 5em;
-    border: outset;
-    border-color: #050f2c;
-    color: #68c2cd;
-    filter: drop-shadow(0 0 0.4em rgba(0, 173, 254));
-}
-
-input[type="submit" i] {
-    border-radius: 5em;
-    border: outset;
-    border-color: #050f2c;
-    color: #68c2cd;
-    filter: drop-shadow(0 0 0.4em rgba(0, 173, 254));
-}
-
-.p-Daniel {
-    filter: drop-shadow(0 0 0.4em rgba(0, 173, 254));
-    color: #ffffff;
-}
-
-p,
-h1{
-    color: #000000;
-    text-align: center;
+/* Efeito de grade suave no fundo da página */
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgb(99 102 241 / 0.12) 1px, transparent 0);
+  background-size: 24px 24px;
 }

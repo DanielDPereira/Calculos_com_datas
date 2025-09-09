@@ -1,118 +1,164 @@
-const btn = document.querySelector("#send");
+// Normaliza uma data para a meia-noite, para remover a influência do fuso horário.
+function normalizarData(data) {
+  return new Date(data.getFullYear(), data.getMonth(), data.getDate());
+}
 
-btn.addEventListener("click", function(e){
+function lerDataDoInput(idElemento) {
+  const elemento = document.getElementById(idElemento);
+  if (!elemento.value) {
+    return null;
+  }
+  const [ano, mes, dia] = elemento.value.split('-').map(Number);
+  return new Date(ano, mes - 1, dia);
+}
 
-    e.preventDefault();
+function formatarDataParaBR(data) {
+  return data.toLocaleDateString('pt-BR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+}
 
-    //Capturando as datas
-    let data1_entrada = document.getElementById('data1').value;
-    let data2_entrada = document.getElementById('data2').value;
+function diasEntreDatas(dataA, dataB) {
+  const msPorDia = 86400000; // Milissegundos em um dia
+  const dataInicial = normalizarData(dataA);
+  const dataFinal = normalizarData(dataB);
+  const diferencaEmMs = dataFinal - dataInicial;
+  return Math.round(diferencaEmMs / msPorDia);
+}
 
-    //Colocando em arrays
-    let data1_array = String(data1_entrada).split("-")
-    let data2_array = String(data2_entrada).split("-")
+function calcularSemanasEDias(totalDeDias) {
+  const diasNaSemana = 7;
+  const semanas = Math.floor(totalDeDias / diasNaSemana);
+  const diasRestantes = totalDeDias % diasNaSemana;
+  return { semanas, diasRestantes };
+}
 
-    //Arrumando a ordem dos elementos nos arrays
-    data1_array.reverse()
-    data2_array.reverse()
+function calcularDiferencaTotal(dataInicial, dataFinal) {
+  // Garante que a data inicial seja sempre a menor para facilitar o cálculo.
+  let inicio = new Date(dataInicial);
+  let fim = new Date(dataFinal);
+  if (fim < inicio) {
+    [inicio, fim] = [fim, inicio];
+  }
 
-    //Criando variáveis para as únidades de tempo
+  let anos = fim.getFullYear() - inicio.getFullYear();
+  let meses = fim.getMonth() - inicio.getMonth();
+  let dias = fim.getDate() - inicio.getDate();
 
-    //Primeira data
-    let dias_data1 = data1_array[0]
-    let meses_data1 = data1_array[1]
-    let anos_data1 = data1_array[2]
+  // Ajustes para casos onde o dia ou mês final é menor que o inicial.
+  if (dias < 0) {
+    meses--;
+    const ultimoDiaDoMesAnterior = new Date(fim.getFullYear(), fim.getMonth(), 0).getDate();
+    dias += ultimoDiaDoMesAnterior;
+  }
+  if (meses < 0) {
+    anos--;
+    meses += 12;
+  }
+  
+  return { anos, meses, dias };
+}
 
-    //Segunda data
-    let dias_data2 = data2_array[0]
-    let meses_data2 = data2_array[1]
-    let anos_data2 = data2_array[2]
+// --- LÓGICA PRINCIPAL ---
 
-    //Calculando
-    const d1 = data1_entrada;
-    const d2 = data2_entrada;
+document.addEventListener('DOMContentLoaded', () => {
 
-    let diffInMs = 0;
+  const painelDiferenca = document.getElementById('painel-diferenca');
+  const painelHoje = document.getElementById('painel-hoje');
+  const abas = document.querySelectorAll('.tab-btn');
+  
+  // Troca de abas
+  abas.forEach(aba => {
+    aba.addEventListener('click', () => {
+      abas.forEach(a => a.setAttribute('aria-selected', 'false'));
+      aba.setAttribute('aria-selected', 'true');
 
-    //Verificando qual data é maior para calcular
-    if (d1 > d2) {
-        diffInMs = new Date(d1) - new Date(d2)
-    }else{
-        diffInMs = new Date(d2) - new Date(d1)
+      const abaSelecionada = aba.dataset.tab;
+      if (abaSelecionada === 'between') {
+        painelHoje.classList.add('hidden');
+        painelDiferenca.classList.remove('hidden');
+      } else {
+        painelDiferenca.classList.add('hidden');
+        painelHoje.classList.remove('hidden');
+      }
+    });
+  });
+
+  // Botões de atalho (Hoje, Amanhã, etc.)
+  const chips = document.querySelectorAll('.chip');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const diasParaAdicionar = Number(chip.dataset.days || 0);
+      const dataBase = normalizarData(new Date());
+      dataBase.setDate(dataBase.getDate() + diasParaAdicionar);
+      
+      const inputDataAlvo = document.getElementById('data-alvo');
+      inputDataAlvo.value = dataBase.toISOString().split('T')[0];
+    });
+  });
+
+  // Botão "Calcular" do painel "Entre Datas"
+  const btnCalcularDiferenca = document.getElementById('btn-calcular-diferenca');
+  btnCalcularDiferenca.addEventListener('click', () => {
+    const dataInicial = lerDataDoInput('data-inicial');
+    const dataFinal = lerDataDoInput('data-final');
+    const aviso = document.getElementById('aviso-diferenca');
+    const painelResultados = document.getElementById('resultados-diferenca');
+
+    if (!dataInicial || !dataFinal) {
+      aviso.classList.remove('hidden');
+      painelResultados.classList.add('hidden');
+      return;
     }
+    aviso.classList.add('hidden');
 
-    let diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    const totalDeDias = Math.abs(diasEntreDatas(dataInicial, dataFinal));
+    const { semanas, diasRestantes } = calcularSemanasEDias(totalDeDias);
+    const { anos, meses, dias } = calcularDiferencaTotal(dataInicial, dataFinal);
 
-    if (d1 == d2){
-        diffInDays = 0
-    }
-
-    console.log(diffInMs)
-    console.log(diffInDays)
-
-    console.log(data1_entrada);
-    console.log(data2_entrada);
-    console.log("-")
-    console.log(data1_array);
-    console.log(data2_array);
-
-    //Retornando resultados no HTML
-    if (diffInDays > 1) {
-        document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de "+Math.abs(diffInDays)+" dias ";
-    }else{
-        if(diffInDays == 1) {
-            document.getElementById("resultado1").innerHTML = "<b>Diferença</b> de 1 dia ";
-        }
-
-        if(diffInDays == 0){
-            document.getElementById("resultado1").innerHTML = "<b>Ambas as datas são o mesmo dia</b>";
-        }
-    }
-
-    if(isNaN(diffInDays)){
-        document.getElementById("resultado1").innerHTML = "<b>Insira um valor válido</b>";
-        console.log("Valor NaN inserido no cálculo 1");
-    }
-
-});
-
-const btn2 = document.querySelector("#send2");
-
-btn2.addEventListener("click", function(e){
-
-    e.preventDefault();
-
-    //Data atual
-    var data = new Date();
-    var dia = String(data.getDate()).padStart(2, '0');
-    var mes = String(data.getMonth() + 1).padStart(2, '0');
-    var ano = data.getFullYear();
-    dataAtual = ano + '-' + mes + '-' + dia;
-    console.log(dataAtual);
+    document.getElementById('resumo-diferenca').innerHTML = `
+      <li><strong>${totalDeDias}</strong> dia(s) no total</li>
+      <li><strong>${semanas}</strong> semana(s) e <strong>${diasRestantes}</strong> dia(s)</li>
+      <li><strong>${anos}</strong> ano(s), <strong>${meses}</strong> mês(es) e <strong>${dias}</strong> dia(s)</li>
+    `;
+    document.getElementById('detalhes-diferenca').innerHTML = `
+      <li>De <strong>${formatarDataParaBR(dataInicial)}</strong> até <strong>${formatarDataParaBR(dataFinal)}</strong></li>
+    `;
     
-    let data_contagem = document.getElementById('dataX').value;
-    console.log(data_contagem);
+    painelResultados.classList.remove('hidden');
+  });
 
-    //Calculando
-    const d1 = dataAtual;
-    const d2 = data_contagem;
-    const diffInMs   = new Date(d2) - new Date(d1)
-    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-    console.log(diffInDays)
+  // Botão "Calcular" do painel "A partir de Hoje"
+  const btnCalcularHoje = document.getElementById('btn-calcular-hoje');
+  btnCalcularHoje.addEventListener('click', () => {
+    const dataAlvo = lerDataDoInput('data-alvo');
+    const aviso = document.getElementById('aviso-hoje');
+    const painelResultados = document.getElementById('resultados-hoje');
 
-    if(diffInDays == 0){
-        document.getElementById("resultado2").innerHTML = "<b>É hoje!</b>";
-    }else{
-        if(diffInDays == 1){
-            document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dia da data atual";
-        }else{
-        document.getElementById("resultado2").innerHTML = "<b>Distância</b> de "+Math.abs(diffInDays)+" dias da data atual";
-        }
+    if (!dataAlvo) {
+      aviso.classList.remove('hidden');
+      painelResultados.classList.add('hidden');
+      return;
+    }
+    aviso.classList.add('hidden');
+
+    const hoje = normalizarData(new Date());
+    const totalDeDias = diasEntreDatas(hoje, dataAlvo);
+    const { anos, meses, dias } = calcularDiferencaTotal(hoje, dataAlvo);
+
+    let mensagem;
+    if (totalDeDias === 0) {
+      mensagem = `Hoje é a data alvo (<strong>${formatarDataParaBR(dataAlvo)}</strong>).`;
+    } else if (totalDeDias > 0) {
+      mensagem = `Faltam <strong>${anos}</strong> ano(s), <strong>${meses}</strong> mês(es) e <strong>${dias}</strong> dia(s) para <strong>${formatarDataParaBR(dataAlvo)}</strong>.`;
+    } else {
+      mensagem = `Se passaram <strong>${anos}</strong> ano(s), <strong>${meses}</strong> mês(es) e <strong>${dias}</strong> dia(s) desde <strong>${formatarDataParaBR(dataAlvo)}</strong>.`;
     }
 
-    if(isNaN(diffInDays)){
-        document.getElementById("resultado2").innerHTML = "<b>Insira um valor válido</b>";
-        console.log("Valor NaN inserido no cálculo 2");
-    }
+    document.getElementById('resumo-hoje').innerHTML = `<li>${mensagem}</li>`;
+    painelResultados.classList.remove('hidden');
+  });
 
 });

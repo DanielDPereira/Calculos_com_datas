@@ -1,98 +1,134 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" class="dark">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora de Datas</title>
+  <meta name="description" content="Calculadora de diferença entre datas e distância a partir de hoje.">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+              400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              800: '#3730a3', 900: '#312e81'
+            }
+          }
+        }
+      },
+      darkMode: 'class'
+    }
+  </script>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Calculadora de data</title>
-
-    <script src="./script.js" defer></script>
-
-
-    <!-- Meu CSS -->
-    <link rel="stylesheet" href="./home.css" />
-    <link rel="stylesheet" href="./style.css" />
-
-    <!-- CSS bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
-    <link rel="shortcut icon" href="./images/favicon_io/favicon-32x32.png" type="image/x-icon" />
-
-    <link rel="apple-touch-icon" sizes="180x180" href="./imagens/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./imagens/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./imagens/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
+<body class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50/70 via-transparent to-transparent dark:from-brand-900/20"></div>
+  <div class="absolute inset-0 -z-10 bg-grid"></div>
 
-<!-- script bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
-<body>
-    
-    <div class="container">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-            
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNav">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div id="myNav" class="collapse navbar-collapse justify-content-end">
-        <ul class="navbar-nav ">
-        <li class="nav-item"><a href="./index.html" class="nav-link active">Calculadora</a></li>
-        </ul>
+  <header class="sticky top-0 z-20 backdrop-blur supports-[backdrop-filter]:bg-slate-900/60 border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-2xl bg-brand-600 text-white grid place-items-center shadow-sm">Δ</div>
+        <div>
+          <h1 class="text-lg font-semibold leading-tight">Calculadora de Datas</h1>
+          <p class="text-xs text-slate-400">Calcule o tempo entre datas</p>
         </div>
-        </nav>
-        </div>
-
-</div>
-
-<div style="text-align:center">
-</br>
-    <h1 style="text-align:center">Calculadora de datas</h1>
-
-</br>
-
-    <p class="p-explicação">&nbsp;&nbsp;Insira as datas que deseja calcular a diferença nos campos abaixo e clique em "Calcular".&nbsp;&nbsp;</p>
-</br>
-
-    <form id="entrada" action="">
-
-        <div style="text-align: center;">
-            <input style="text-align:center" type="date" id="data1" name="data1">
-            &nbsp;
-            <input style="text-align:center" type="date" id="data2" name="data2">
-        </div>
-
-    </br>
-        <input style="text-align:center" type="submit" id="send" value="  Calcular  ">
-    <br>
-    </br>
-    <p id="resultado1"></p>
-
-    <p>&nbsp;&nbsp;Insira a data para qual deseja saber a distância de hoje  no campo abaixo.&nbsp;&nbsp;</p>
-
-    <br>
-    <div id="div_dataX">
-        <input style="text-align:center" type="date" id="dataX" name="dataX" >
+      </div>
+      <a href="https://github.com/DanielDPereira/Calculos_com_datas" target="_blank" class="px-3 py-1.5 rounded-xl text-sm border border-slate-700 hover:bg-slate-800 transition">Código</a>
     </div>
-    </br>
-    <input style="text-align:center" type="submit" id="send2" value="  Calcular  ">
-    <br>
-    </br>
-    <p id="resultado2"></p>
+  </header>
 
-    </form>
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <section class="mb-6">
+      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 md:p-7 shadow-sm">
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Calcule o tempo entre duas datas</h2>
+        <p class="mt-2 text-slate-400">Selecione duas datas para ver a diferença entre elas ou escolha uma data para saber a distância de hoje.</p>
+      </div>
+    </section>
 
-</div>
+    <section class="mb-8">
+      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-sm">
+        <div class="flex gap-2 mb-4 border-b border-slate-800">
+          <button data-tab="between" class="tab-btn px-4 py-2 -mb-px border-b-2 text-slate-400 border-transparent aria-selected:border-brand-600 aria-selected:text-brand-300" aria-selected="true">Entre Datas</button>
+          <button data-tab="fromtoday" class="tab-btn px-4 py-2 -mb-px border-b-2 text-slate-400 border-transparent aria-selected:border-brand-600 aria-selected:text-brand-300">A partir de Hoje</button>
+        </div>
 
-    <div class="created-by">
-        <p><b>Created by:&nbsp;</b><p class="p-Daniel">Daniel Dias Pereira</p></p>
-    </div>
+        <div id="painel-diferenca" role="tabpanel" class="space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium" for="data-inicial">Data inicial</label>
+              <input id="data-inicial" type="date" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2" />
+            </div>
+            <div>
+              <label class="text-sm font-medium" for="data-final">Data final</label>
+              <input id="data-final" type="date" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2" />
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <div class="ml-auto"></div>
+            <button id="btn-calcular-diferenca" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium">Calcular</button>
+          </div>
+          <p id="aviso-diferenca" class="hidden text-sm text-amber-400">Preencha as duas datas.</p>
 
+          <div id="resultados-diferenca" class="hidden grid gap-4 md:grid-cols-2">
+            <div class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+              <h3 class="font-semibold mb-1">Resultado</h3>
+              <ul class="text-sm leading-7" id="resumo-diferenca"></ul>
+            </div>
+            <div class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+              <h3 class="font-semibold mb-1">Detalhes</h3>
+              <ul class="text-sm leading-7" id="detalhes-diferenca"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="painel-hoje" role="tabpanel" class="hidden space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-medium" for="data-alvo">Data alvo</label>
+              <input id="data-alvo" type="date" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2" />
+            </div>
+            <div>
+              <label class="text-sm font-medium">Atalhos</label>
+              <div class="mt-1 flex flex-wrap gap-2">
+                <button class="chip px-3 py-1.5 rounded-xl border border-slate-700 hover:bg-slate-800 text-sm" data-days="0">Hoje</button>
+                <button class="chip px-3 py-1.5 rounded-xl border border-slate-700 hover:bg-slate-800 text-sm" data-days="1">Amanhã</button>
+                <button class="chip px-3 py-1.5 rounded-xl border border-slate-700 hover:bg-slate-800 text-sm" data-days="-1">Ontem</button>
+                <button class="chip px-3 py-1.5 rounded-xl border border-slate-700 hover:bg-slate-800 text-sm" data-days="7">+7 dias</button>
+                <button class="chip px-3 py-1.5 rounded-xl border border-slate-700 hover:bg-slate-800 text-sm" data-days="30">+30 dias</button>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <div class="ml-auto"></div>
+            <button id="btn-calcular-hoje" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium">Calcular</button>
+          </div>
+          <p id="aviso-hoje" class="hidden text-sm text-amber-400">Informe a data alvo.</p>
+
+          <div id="resultados-hoje" class="hidden grid gap-4">
+            <div class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+              <h3 class="font-semibold mb-1">Resultado</h3>
+              <ul class="text-sm leading-7" id="resumo-hoje"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-10 text-center text-sm text-slate-400">
+      <p>Feito por <a class="underline decoration-dotted hover:no-underline" href="https://danieldpereira.github.io/danieldias.py/" target="_blank">Daniel Dias Pereira</a>.</p>
+    </footer>
+  </main>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
