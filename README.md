@@ -12,6 +12,8 @@ O projeto está hospedado no GitHub Pages e pode ser usado diretamente no navega
 
 O objetivo desta calculadora é facilitar o cálculo de diferenças de datas, seja entre duas datas específicas ou entre uma data e o dia atual. A interface é intuitiva, responsiva e funcional em dispositivos móveis e desktops.
 
+<img style="width: 70%;" src="https://danieldpereira.github.io/danieldias.py/assets/imagens/ThumbProjetos/ProjetoDatas.png">
+
 ### Funcionalidades
 
 - Calcular a diferença entre duas datas  
